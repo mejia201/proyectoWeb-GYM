@@ -198,10 +198,10 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
   padding: 155px 0 100px;
 }
 
-.overly, .bg-4 {
+.overly, .bg-4, .bg-5{
   position: relative;
 }
-.overly:before, .bg-4:before {
+.overly:before, .bg-4:before, .bg-5:before {
   content: "";
   position: absolute;
   left: 0;
@@ -399,6 +399,11 @@ ul.dropdown-menu li {
 .bg-4 {
   background: url("../images/about/img-7.jpg") no-repeat;
   background-size: cover;
+}
+
+.bg-5 {
+    background: url("../images/about/img-3.jpg") no-repeat;
+    background-size: cover;
 }
 
 .mt-80px {
