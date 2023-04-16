@@ -8,6 +8,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="theme-name" content="gymbro" />
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
 
   <title>GymBro| Fitness</title>
 
@@ -19,7 +23,7 @@
   <link rel="stylesheet" href="plugins/magnific-popup/dist/magnific-popup.css">
   <link rel="stylesheet" href="plugins/slick-carousel/slick/slick.css">
   <link rel="stylesheet" href="plugins/slick-carousel/slick/slick-theme.css">
-  <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css?1.0">
 
 	<link rel="shortcut icon" type="image/png" href="~/icono_principal.png" />
 
@@ -40,19 +44,10 @@
 				<li class="nav-item active">
 					<a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
 				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">Pages</a>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" asp-controller="Home" asp-action="Index">About</a></li>
-						<li><a class="dropdown-item" asp-controller="Home" asp-action="Index">Trainer</a></li>
-						<li><a class="dropdown-item" asp-controller="Home" asp-action="Index">Courses</a></li>
-					</ul>
-				</li>
-				<li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Services</a></li>
-				<li class="nav-item"><a class="nav-link" asp-action="Pricing">Memebership</a></li>
-				<li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">Login</a></li>
-				<li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" asp-action="Pricing">Membresía</a></li>
+				<li class="nav-item"><a class="nav-link" asp-action="Index">Consejos Fit</a></li>
+				<li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">Iniciar sesión</a></li>
+
 			</ul>
 			<div class="my-md-0 ml-lg-4 mt-4 mt-lg-0 ml-auto text-lg-right mb-3 mb-lg-0">
 				<a href="tel:+503-7889-2015">
@@ -63,15 +58,14 @@
 	</div>
 </nav>
 
-
 <section class="slider">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
 				<span class="h6 d-inline-block mb-4 subhead text-uppercase">Gym fitness club</span>
-				<h1 class="text-uppercase text-white mb-5">Step up your <span class="text-color">fitness Challange</span><br>with us</h1>
+				<h1 class="text-uppercase text-white mb-5">Intensifica<span class="text-color"> tu reto fitness</span><br>con nosotros</h1>
 			
-				<a asp-action="Pricing" class="btn btn-main " >Join Us <i class="ti-angle-right ml-3"></i></a>
+				<a asp-action="Pricing" class="btn btn-main ">Únete a nosotros<i class="ti-angle-right ml-3"></i></a>
 			</div>
 		</div>
 	</div>
@@ -84,25 +78,26 @@
 			<div class="col-lg-4 col-md-6">
 				<div class="card p-5 border-0 rounded-top border-bottom position-relative hover-style-1">
 					<span class="number">01</span>
-					<h3 class="mt-3">Modern Equipment</h3>
-					<p class="mt-3 mb-4">Vestibulum sit amet blan augue, sit amet vehicula mi. Aliquam vitae varius.</p>
-					<a asp-action ="Index" class="text-color text-uppercase font-size-13 letter-spacing font-weight-bold"><i class="ti-minus mr-2 "></i>more Details</a>
+					<h3 class="mt-3">CROSSFIT</h3>
+					<p class="mt-3 mb-4">Fitness funcional que combina entrenamiento con pesas rusas, 
+						levantamiento de pesas olímpico, gimnasia, lanzamientos de balones medicinales, 
+						entrenamiento con mancuernas, ejercicios pliométricos, levantamiento de pesas, 
+						y saltar la cuerda.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6">
 				<div class="card p-5 border-0 rounded-top hover-style-1">
 					<span class="number">02</span>
-					<h3 class="mt-3">PROFFESIONAL TRAINER</h3>
-					<p class="mt-3 mb-4">Vestibulum sit amet blan augue, sit amet vehicula mi. Aliquam vitae varius.</p>
-					<a asp-action="Index" class="text-color text-uppercase font-size-13 letter-spacing font-weight-bold"><i class="ti-minus mr-2 "></i>more Details</a>
+					<h3 class="mt-3">COMPROMETIDOS CONTIGO</h3>
+					<p class="mt-3 mb-4">Estamos comprometidos a ayudarlo a superar sus objetivos de acondicionamiento físico</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6">
 				<div class="card p-5 border-0 rounded-top hover-style-1">
 					<span class="number">03</span>
-					<h3 class="mt-3">HEALTHY DIET Plan</h3>
-					<p class="mt-3 mb-4">Vestibulum sit amet blan augue, sit amet vehicula mi. Aliquam vitae varius.</p>
-					<a asp-action="Index" class="text-color text-uppercase font-size-13 letter-spacing font-weight-bold"><i class="ti-minus mr-2 "></i>more Details</a>
+					<h3 class="mt-3">AUMENTAR LA MOTIVACIÓN</h3>
+					<p class="mt-3 mb-4">Descubra las ventajas de la membresía a medida que se pone en forma, 
+						                     se mantiene en forma y se centra en su salud y bienestar.</p>
 				</div>
 			</div>
 		</div>
@@ -115,16 +110,15 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-6">
-				<img src="images/bg/bg-5.jpg" alt="" class="img-fluid rounded shadow w-100">
+				<img src="images\bg\young-man-sportswear-exercise-class-gym.jpg" alt="" class="img-fluid rounded shadow w-100">
 			</div>
-			
+			 
 			<div class="col-lg-6">
 				<div class="pl-3 mt-5 mt-lg-0">
-					<h2 class="mt-1 mb-3">We’ve skill in <br>wide <span class="text-color">range of fitness</span> and Other body health facility. </h2>
+					<h2 class="mt-1 mb-3">Tenemos habilidad en <br> una amplia <span class="text-color">gama de fitness</span> y otras instalaciones de salud del cuerpo. </h2>
 
-					<p class="mb-4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis Theme natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam lorem ante, dapibus in.</p>
+					<p class="mb-4">Cambia tu cuerpo, cambia tu mentalidad. Nuestro gimnasio tiene todo lo que necesitas para obtener resultados.</p>
 
-					<a asp-action="Index" class="btn btn-main">Learn More<i class="fa fa-angle-right ml-2"></i></a>
 				</div>
 			</div>
 		</div>
@@ -139,12 +133,12 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-8 col-md-12 col-sm-12">
 				<div class="text-center">
-					<span class="h6 letter-spacing text-white">Dscover your potential</span>
+					<span class="h6 letter-spacing text-white">Descubre tu potencial</span>
 					<h2 class="text-lg mt-4 mb-5 text-white">
-						Book your early seat to get <span class="text-color">summer 25% </span>dicsount
+						Registrate ya, tenemos un <span class="text-color"> 25% </span>de descuento
 					</h2>
 
-					<a asp-action="Pricing" class="btn btn-main text-white">Join Today</a>
+					<a asp-action="Pricing" class="btn btn-main text-white">Únete hoy</a>
 				</div>
 			</div>
 		</div>
@@ -159,8 +153,8 @@
 			<div class="col-lg-8 text-center">
 				<div class="section-title">
 					<div class="divider mb-3"></div>
-					<h2>Our Services</h2>
-					<p>We offer more than 35 group exercis, aerobic classes each week.</p>
+					<h2>Nuestros servicios</h2>
+					<p>Ofrecemos variedad de ejercicios, para cada parte de tú cuerpo.</p>
 				</div>
 			</div>
 		</div>
@@ -169,43 +163,43 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="text-center  px-4 py-5 hover-style-1">
 					<i class="icofont-gym-alt-2 text-lg text-color"></i>
-					<h4 class="mt-3 mb-4 text-uppercase">WEIGHT LIFTING</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, molestias.</p>
+					<h4 class="mt-3 mb-4 text-uppercase">LEVANTAMIENTO DE PESAS</h4>
+					<p>Podras realizar diferentes tipos de ejercicios con pesas.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="text-center  px-4 py-5 hover-style-1">
 					<i class="icofont-cycling-alt text-lg text-color"></i>
-					<h4 class="mt-3 mb-4 text-uppercase">Cycling</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, molestias.</p>
+					<h4 class="mt-3 mb-4 text-uppercase">FORMACIÓN PERSONALIZADA</h4>
+					<p>Tú escoges que ejercicios hacer, para alcanzar tu meta.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="text-center  px-4 py-5 hover-style-1">
 					<i class="icofont-gym-alt-3 text-lg text-color"></i>
-					<h4 class="mt-3 mb-4 text-uppercase">YOGA MEDIDATION</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, molestias.</p>
+					<h4 class="mt-3 mb-4 text-uppercase">Cuerpo más saludable</h4>
+					<p>Descubre un régimen de culturismo integral diseñado para esculpir tu físico a la perfección.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="text-center  px-4 py-5 hover-style-1">
 					<i class="icofont-muscle text-lg text-color"></i>
-					<h4 class="mt-3 mb-4 text-uppercase">Building body</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, molestias.</p>
+					<h4 class="mt-3 mb-4 text-uppercase">INOVACIÓN</h4>
+					<p>Nos comprometemos a avanzar con persistencia implacable y mente abierta.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="text-center  px-4 py-5 hover-style-1">
 					<i class="icofont-dumbbell text-lg text-color"></i>
-					<h4 class="mt-3 mb-4 text-uppercase">Fitness Track</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, molestias.</p>
+					<h4 class="mt-3 mb-4 text-uppercase">TRABAJO EN EQUIPO</h4>
+					<p>Trabajamos juntos de forma colaborativa, alentadora y respetuosa.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="text-center  px-4 py-5 hover-style-1">
 					<i class="icofont-gym text-lg text-color"></i>
 					<h4 class="mt-3 mb-4 text-uppercase">Fitness</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, molestias.</p>
+					<p>Para todos los objetivos y niveles.</p>
 				</div>
 			</div>
 		</div>
@@ -220,8 +214,8 @@
 			<div class="col-lg-8 text-center">
 				<div class="section-title">
 					<div class="divider mb-3"></div>
-					<h2>Our gallery</h2>
-					<p>We offer more than 35 group exercis, aerobic classes each week.</p>
+					<h2>Ejercicios Completos</h2>
+					<p>Lleva tu entrenamiento al siguiente nivel</p>
 				</div>
 			</div>
 		</div>
@@ -279,61 +273,8 @@
 			<div class="col-lg-8 text-center">
 				<div class="section-title">
 					<div class="divider mb-3"></div>
-					<h2>Popular Courses</h2>
-					<p>We offer more than 35 group exercis, aerobic classes each week.</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg-3 col-md-6">
-				<div class="card border-0 rounded-0 p-0 mb-5 mb-lg-0 shadow-sm">
-					<img src="images/gallery/course-1.jpg" alt="" class="img-fluid">
-
-					<div class="card-body">
-						<a asp-action="Index"><h4 class="font-secondary mb-0">Build Body</h4></a>
-						<p class=" mb-2">Mentor: Jimmy Karter</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-3 col-md-6">
-				<div class="card border-0 rounded-0 p-0 mb-5 mb-lg-0 shadow-sm">
-					<img src="images/gallery/course-2.jpg" alt="" class="img-fluid">
-
-					<div class="card-body">
-						<a asp-action="Index"><h4 class="font-secondary mb-0">Build Body</h4></a>
-						<p class="mb-2">Mentor: Jimmy Karter</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-3 col-md-6">
-				<div class="card border-0 rounded-0 p-0 mb-5 mb-lg-0 shadow-sm">
-					<img src="images/gallery/course-3.jpg" alt="" class="img-fluid">
-
-					<div class="card-body">
-						<a asp-action="Index"><h4 class="font-secondary mb-0">Build Body</h4></a>
-						<p class=" mb-2">Mentor: Jimmy Karter</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6">
-				<div class="card border-0 rounded-0 p-0 mb-5 mb-lg-0 shadow-sm">
-					<img src="images/gallery/course-2.jpg" alt="" class="img-fluid">
-
-					<div class="card-body">
-						<a asp-action="Index"><h4 class="font-secondary mb-0">Build Body</h4></a>
-						<p class=" mb-2">Mentor: Jimmy Karter</p>
-					</div>
-				</div>
-			</div>
-
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-lg-8">
-				<div class="mt-5 text-center">
-					<a asp-action="Index" class="btn btn-main">See all our Courses</a>
+					<h2>Ejercicios populares</h2>
+					<p>Empiece hoy con nosotros para tener el cuerpo que tanto desea tener.</p>
 				</div>
 			</div>
 		</div>
@@ -347,41 +288,32 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
 				<h2 class="text-white mb-4">GymBro</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus illo ad quo sunt maiores, sint nostrum omnis eaque cumque dolorum.</p>
+				<p>
+					Beneficios de la Membresía
+				</p>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				<p>Descubrirás lo fácil que es mantenerse motivado y en forma. 
+					Un gimnasio estructurado para fluir, que te permite entrar y salir rápidamente.</p>
+
 			</div>
 			
 
 			<div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-				<div class="footer-widget recent-blog">
-					<h4 class="mb-4 text-white letter-spacing text-uppercase">Recents Posts</h4>
-					<div>
-						<a href="blog-single.html"class="text-white">Claritas est etiam processus dynamicus</a>
-						<p class="text-sm mt-2 text-white-50">30 february 2019</p>
-					</div>
-					<div class="mt-4">
-						<a href="blog-single.html"class="text-white">Claritas est etiam processus dynamicus</a>
-						<p class="text-sm mt-2 text-white-50">30 february 2019</p>
-					</div>
-
-				</div>
 			</div>
+
 			<div class="col-lg-2 col-md-5 mb-5 mb-lg-0">
 				<div class="footer-widget">
-					<h4 class="mb-4 text-white letter-spacing text-uppercase">Quick Links</h4>
+					<h4 class="mb-4 text-white letter-spacing text-uppercase">Enlaces rápidos</h4>
 					<ul class="list-unstyled footer-menu lh-40 mb-0">
-						<li><a asp-action="Index"><i class="ti-angle-double-right mr-2"></i>About Us</a></li>
-						<li><a asp-action="Index"><i class="ti-angle-double-right mr-2"></i>Services</a></li>
-						<li><a asp-action="Pricing"><i class="ti-angle-double-right mr-2"></i>Membership</a></li>
-						<li><a asp-action="Index"><i class="ti-angle-double-right mr-2"></i>Courses</a></li>
-						<li><a asp-action="Index"><i class="ti-angle-double-right mr-2"></i>Contact us</a></li>
+						<li><a asp-action="Pricing"><i class="ti-angle-double-right mr-2"></i>Membresía</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-5">
 				<div class="footer-widget">
-					<h4 class="mb-4 text-white letter-spacing text-uppercase">Home location</h4>
+					<h4 class="mb-4 text-white letter-spacing text-uppercase">
+						Localización
+					</h4>
 					<p>Santa Ana, El Salvador</p>
 					<span class="text-white">+503-7889-2015</span>
 					<span class="text-white">GymBro@gmail.com</span>
@@ -389,7 +321,7 @@
 			</div>
 		</div>
 
-		<div class="row align-items-center mt-5 px-3 bg-black mx-1">
+		<div class="row align-items-center mt-1 px-3 bg-black mx-1">
 			<div class="col-lg-4">
 				<p class="text-white mt-3">GymBro © 2023<a class="text-color"></a></p>
 			</div>

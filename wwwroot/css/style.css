@@ -370,7 +370,7 @@ ul.dropdown-menu li {
 }
 
 .slider {
-  background: url("../images/bg/bg-7.jpg") no-repeat 0% 30%;
+  background: url("../images/bg/bg-principal.jpg") no-repeat 0% 30%;
   background-size: cover;
   padding: 180px 0px;
 }
@@ -387,7 +387,7 @@ ul.dropdown-menu li {
 }
 
 .bg-2 {
-  background: url("../images/bg/bg-image-2-1.jpg") no-repeat;
+  background: url("../images/bg/pricing.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -557,7 +557,7 @@ ul.dropdown-menu li {
 }
 
 .cta {
-  background: url("../images/bg/slide2.jpg") fixed 50% 50% no-repeat;
+  background: url("../images/bg/woman-doing-sport-home.jpg") fixed 50% 50% no-repeat;
   background-size: cover;
 }
 

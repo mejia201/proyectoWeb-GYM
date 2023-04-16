@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using proyectoWeb_GYM.Models;
+using proyectoWeb_GYM.Utilities;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -13,8 +14,6 @@ namespace proyectoWeb_GYM.Controllers
 
 	public class HomeController : Controller
     {
-
-        static string cadena_conexion = "Data Source=LAPTOP-Q2J0NJ3F\\SQLEXPRESS;Initial Catalog=db_Gym;Integrated Security=True";
 
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor context;
@@ -45,8 +44,10 @@ namespace proyectoWeb_GYM.Controllers
             return View();
         }
 
+        [Authentication]
         public IActionResult Dashboard()
         {
+			ViewBag.correo = HttpContext.Session.GetString("Usuario");
             return View();
         }
 
@@ -56,56 +57,67 @@ namespace proyectoWeb_GYM.Controllers
         }
 
 
-
-        [HttpPost]
-		public IActionResult SignUp(Usuario oUsuario)
+		public IActionResult Logout()
 		{
-            bool registrado;
-            string mensaje;
+           HttpContext.Session.Remove("Usuario");
+            return RedirectToAction("Login");
+        }
 
-            using(SqlConnection cn = new SqlConnection(cadena_conexion))
-            {
-                SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", cn);
-                cmd.Parameters.AddWithValue("email", oUsuario.email);
-                cmd.Parameters.AddWithValue("clave", oUsuario.clave);
-                cmd.Parameters.Add("registrado", SqlDbType.Bit).Direction = ParameterDirection.Output; 
-                cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output; 
+        public IActionResult RecuperarContraseña()
+        {
+            return View();
+        }
 
-                cmd.CommandType = CommandType.StoredProcedure;
 
-                cn.Open();
+		//[HttpPost]
+		//public IActionResult SignUp(Usuario oUsuario)
+		//{
+  //          bool registrado;
+  //          string mensaje;
 
-                cmd.ExecuteNonQuery();
+  //          using(SqlConnection cn = new SqlConnection(cadena_conexion))
+  //          {
+  //              SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", cn);
+  //              cmd.Parameters.AddWithValue("correo", oUsuario.correo);
+  //              cmd.Parameters.AddWithValue("clave", oUsuario.clave);
+  //              cmd.Parameters.Add("registrado", SqlDbType.Bit).Direction = ParameterDirection.Output; 
+  //              cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output; 
 
-                registrado = Convert.ToBoolean(cmd.Parameters["registrado"].Value);
-                mensaje = cmd.Parameters["mensaje"].Value.ToString();
-            }
+  //              cmd.CommandType = CommandType.StoredProcedure;
 
-            ViewData["Mensaje"] = mensaje;
+  //              cn.Open();
 
-            if(registrado)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            else
-            {
-                return View();
-            }
-		}
+  //              cmd.ExecuteNonQuery();
+
+  //              registrado = Convert.ToBoolean(cmd.Parameters["registrado"].Value);
+  //              mensaje = cmd.Parameters["mensaje"].Value.ToString();
+  //          }
+
+  //          ViewData["Mensaje"] = mensaje;
+
+  //          if(registrado)
+  //          {
+  //              return RedirectToAction("Login", "Home");
+  //          }
+  //          else
+  //          {
+  //              return View();
+  //          }
+		//}
 
 
 		[HttpPost]
 		public IActionResult Login(Usuario oUsuario)
 		{   
-			using (SqlConnection cn = new SqlConnection(cadena_conexion))
+			using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
 			{
-				SqlCommand cmd = new SqlCommand("sp_ValidarUsuario", cn);
-				cmd.Parameters.AddWithValue("email", oUsuario.email);
+				SqlCommand cmd = new SqlCommand("sp_ValidarUsuario", oConexion);
+				cmd.Parameters.AddWithValue("correo", oUsuario.correo);
 				cmd.Parameters.AddWithValue("clave", oUsuario.clave);
 
 				cmd.CommandType = CommandType.StoredProcedure;
 
-				cn.Open();
+				oConexion.Open();
 
 				oUsuario.id_usuario = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -113,6 +125,8 @@ namespace proyectoWeb_GYM.Controllers
 
             if(oUsuario.id_usuario != 0)
             {
+				HttpContext.Session.SetString("Usuario", oUsuario.correo);
+
                 return RedirectToAction("Dashboard", "Home");
             }
             else
@@ -125,6 +139,37 @@ namespace proyectoWeb_GYM.Controllers
 
 		}
 
+
+
+		[HttpPost]
+		public IActionResult RecuperarContraseña(Usuario oUsuario)
+		{
+			using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+			{
+				SqlCommand cmd = new SqlCommand("sp_RecuperarContraseña", oConexion);
+				cmd.Parameters.AddWithValue("correo", oUsuario.correo);
+				cmd.Parameters.AddWithValue("clave", oUsuario.clave);
+
+				cmd.CommandType = CommandType.StoredProcedure;
+
+				oConexion.Open();
+
+				oUsuario.id_usuario = Convert.ToInt32(cmd.ExecuteScalar());
+
+			}
+
+			if (oUsuario.id_usuario != 0)
+			{
+				return RedirectToAction("Dashboard", "Home");
+			}
+			else
+			{
+				ViewData["Mensaje"] = "Usuario no encontrado!";
+				return View();
+
+			}
+
+		}
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
