@@ -2,16 +2,20 @@
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //Layout = null;
 
 }
 
-<h3 class="text-center">Bienvenido @ViewBag.correo</h3>
-@*<a asp-controller="Home" asp-action="Logout">Salir</a>*@
-<button class="btn btn-outline-primary btn-block" type="submit"><i class="fa fa-sign-in"></i>Cerrar sesión</button>
-
-<div class="col-lg-12">
-    <p class="text-lg-center text-md-center text-sm-center text-xs-center">Created by <a href="http://www.koalapix.com" target="_blank">koalapix. studio</a>, for crazy developers...</p>
-</div>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Bienvenido @ViewBag.nombre</h1>
+            <p class="lead text-body-secondary">En esta página podras visualizar tú perfil entre otras cosas más.</p>
+            <p>
+                <a href="#" class="btn btn-primary my-2">Completa tú perfil</a>
+                <a href="@Url.Action("Logout", "Home")" class="btn btn-danger my-2">Cerrar sesión</a>
+            </p>
+        </div>
+    </div>
+</section>
 
 

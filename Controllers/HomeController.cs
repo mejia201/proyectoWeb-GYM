@@ -29,7 +29,7 @@ namespace proyectoWeb_GYM.Controllers
             return View();
         }
 
-        public IActionResult Login()
+		public IActionResult Login()
         {
             return View();
         }
@@ -47,7 +47,7 @@ namespace proyectoWeb_GYM.Controllers
         [Authentication]
         public IActionResult Dashboard()
         {
-			ViewBag.correo = HttpContext.Session.GetString("Usuario");
+			ViewBag.nombre = HttpContext.Session.GetString("Usuario");
             return View();
         }
 
@@ -69,44 +69,55 @@ namespace proyectoWeb_GYM.Controllers
         }
 
 
-		//[HttpPost]
-		//public IActionResult SignUp(Usuario oUsuario)
-		//{
-  //          bool registrado;
-  //          string mensaje;
+        [HttpPost]
+        public IActionResult SignUp(Usuario oUsuario)
+        {
+            bool registrado;
+            string mensaje;
 
-  //          using(SqlConnection cn = new SqlConnection(cadena_conexion))
-  //          {
-  //              SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", cn);
-  //              cmd.Parameters.AddWithValue("correo", oUsuario.correo);
-  //              cmd.Parameters.AddWithValue("clave", oUsuario.clave);
-  //              cmd.Parameters.Add("registrado", SqlDbType.Bit).Direction = ParameterDirection.Output; 
-  //              cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output; 
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", oConexion);
+                cmd.Parameters.AddWithValue("nombre", oUsuario.nombre);
+                cmd.Parameters.AddWithValue("apellido", oUsuario.apellido);
+                cmd.Parameters.AddWithValue("direccion", oUsuario.direccion);
+                cmd.Parameters.AddWithValue("telefono", oUsuario.telefono);
+                cmd.Parameters.AddWithValue("correo", oUsuario.correo);
+                cmd.Parameters.AddWithValue("clave", oUsuario.clave);
+                cmd.Parameters.AddWithValue("num_cuenta", oUsuario.num_cuenta);
+                cmd.Parameters.AddWithValue("nombre_titular", oUsuario.nombre_titular);
+                cmd.Parameters.AddWithValue("cvv", oUsuario.cvv);
+                cmd.Parameters.AddWithValue("mes", oUsuario.mes);
+                cmd.Parameters.AddWithValue("anio", oUsuario.anio);
+                cmd.Parameters.AddWithValue("id_membresia", oUsuario.oMembresia.id_membresia);
 
-  //              cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("registrado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
-  //              cn.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
 
-  //              cmd.ExecuteNonQuery();
+                oConexion.Open();
 
-  //              registrado = Convert.ToBoolean(cmd.Parameters["registrado"].Value);
-  //              mensaje = cmd.Parameters["mensaje"].Value.ToString();
-  //          }
+                cmd.ExecuteNonQuery();
 
-  //          ViewData["Mensaje"] = mensaje;
+                registrado = Convert.ToBoolean(cmd.Parameters["registrado"].Value);
+                mensaje = cmd.Parameters["mensaje"].Value.ToString();
+            }
 
-  //          if(registrado)
-  //          {
-  //              return RedirectToAction("Login", "Home");
-  //          }
-  //          else
-  //          {
-  //              return View();
-  //          }
-		//}
+            ViewData["Mensaje"] = mensaje;
+
+            if (registrado)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
 
 
-		[HttpPost]
+        [HttpPost]
 		public IActionResult Login(Usuario oUsuario)
 		{   
 			using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
@@ -125,7 +136,7 @@ namespace proyectoWeb_GYM.Controllers
 
             if(oUsuario.id_usuario != 0)
             {
-				HttpContext.Session.SetString("Usuario", oUsuario.correo);
+				HttpContext.Session.SetString("Usuario", oUsuario.nombre);
 
                 return RedirectToAction("Dashboard", "Home");
             }

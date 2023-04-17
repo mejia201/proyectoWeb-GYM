@@ -26,9 +26,11 @@
                     <h2 style="text-align: center;">
                         Revise su pedido y finalice la compra
                     </h2>
+                    <hr />
+                    <a href="@Url.Action("Login", "Home")" class="btn btn-info" style="width: 100%;">Si ya tienes cuenta, Inicia Sesión</a>
                     <hr/>
                     <div class="shopping_cart">
-                        <form class="form-horizontal" role="form" action="" method="post" id="payment-form">
+                        <form class="form-horizontal" action="@Url.Action("SignUp", "Home")" method="post">
                             <div class="panel-group" id="accordion">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -44,27 +46,26 @@
                                                         <tr>
                                                             <td colspan="2">
                                                                 <b>
-                                                                    Estándar Pro Pack
+                                                                    Escoge un Plan
                                                                 </b>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                <ul>
-                                                                    <li>Todos los beneficios</li>
-                                                                    <li>Entrena donde quieras</li>
-                                                                    <li>Programa personalizado</li>
-                                                                </ul>
-                                                            </td>
-                                                            <td>
-                                                                <b>$3.00</b>
+                                                            <td>                               
+                                                                <select class="form-control col-sm-2"
+                                                                        data-stripe="membresia" name="id_membresia"
+                                                                        style="margin-left:5px;">
+                                                                    <option value="01">Mensual (01)</option>
+                                                                    <option value="02">Anual (02)</option>
+                                                                </select>
+
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div style="text-align: center;">
-                                                        <h4>Total del pedido con descuento</h4>
+                                                        <h4>Se te hará un descuento de </h4>
                                                         <h3><span style="color:green;">$2.25</span></h3>
                                                     </div>
                                                 </div>
@@ -103,7 +104,7 @@
                                                     <label for="nombre">Nombre:</label>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" id="nombre" name="nombre"
+                                                    <input class="form-control" name="nombre"
                                                            required="required" type="text"/>
                                                 </td>
                                             </tr>
@@ -112,7 +113,7 @@
                                                     <label for="apellido">Apellido:</label>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" id="apellido" name="apellido"
+                                                    <input class="form-control" name="apellido"
                                                            required="required" type="text" />
                                                 </td>
                                             </tr>
@@ -121,7 +122,7 @@
                                                     <label for="direccion">Dirección:</label>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" id="direccion" name="direccion"
+                                                    <input class="form-control" name="direccion"
                                                            required="required" type="text"/>
                                                 </td>
                                             </tr>
@@ -130,7 +131,7 @@
                                                     <label for="id_postalcode">Código Postal:</label>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" id="id_postalcode" name="postalcode"
+                                                    <input class="form-control" name="postalcode"
                                                            type="text" placeholder="+503" disabled />
                                                 </td>
                                             </tr>
@@ -139,7 +140,7 @@
                                                     <label for="telefono">Télefono:</label>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" id="telefono" name="telefono"
+                                                    <input class="form-control" name="telefono"
                                                            required="required" type="text"/>
                                                 </td>
                                             </tr>
@@ -148,7 +149,7 @@
                                                     <label for="correo">Correo:</label>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" id="correo"
+                                                    <input class="form-control"
                                                            name="correo" required="required" type="text" />
                                                 </td>
                                             </tr>
@@ -158,7 +159,7 @@
                                                     <label for="clave">Contraseña:</label>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" id="clave"
+                                                    <input class="form-control"
                                                            name="clave" required="required" type="text" />
                                                 </td>
                                             </tr>
@@ -199,7 +200,7 @@
                                                           </label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control" stripe-data="name"
-                                                           id="name-on-card">
+                                                           name="nombre_titular">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -208,7 +209,7 @@
                                                 </label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control" stripe-data="number"
-                                                           id="card-number">
+                                                           name="num_cuenta">
                                                     <br/>
                                                     <div>
                                                         <img class="pull-right"
@@ -227,7 +228,7 @@
                                                         <div class="row">
                                                             <div class="col-xs-3">
                                                                 <select class="form-control col-sm-2"
-                                                                        data-stripe="exp-month" id="card-exp-month"
+                                                                        data-stripe="exp-month" name="mes"
                                                                         style="margin-left:5px;">
                                                                     <option value="01">Enero (01)</option>
                                                                     <option value="02">Febrero (02)</option>
@@ -245,7 +246,7 @@
                                                             </div>
                                                             <div class="col-xs-3">
                                                                 <select class="form-control" data-stripe="exp-year"
-                                                                        id="card-exp-year">
+                                                                        name="anio">
                                                                     <option value="2023">2023</option>
                                                                     <option value="2024">2024</option>
                                                                     <option value="2025">2025</option>
@@ -264,7 +265,7 @@
                                                     <label class="col-sm-3 control-label" for="cvv">CVC de la tarjeta</label>
                                                     <div class="col-sm-3">
                                                         <input type="text" class="form-control" stripe-data="cvc"
-                                                               id="card-cvc">
+                                                               name="cvv">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -285,6 +286,7 @@
                                 </div>
                             </div>
 						</form>
+
                     </div>
                 </div>
                 
