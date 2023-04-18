@@ -116,6 +116,48 @@ namespace proyectoWeb_GYM.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult GuardarDatos(Info_usuario oUsuario)
+        {
+            bool registrado;
+            string mensaje;
+
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("sp_AgregarInformacionPersonal", oConexion);
+                    cmd.Parameters.AddWithValue("edad", oUsuario.edad);
+                    cmd.Parameters.AddWithValue("peso", oUsuario.peso);
+                    cmd.Parameters.AddWithValue("estatura", oUsuario.estatura);
+                   
+
+
+                    cmd.Parameters.Add("registrado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    registrado = Convert.ToBoolean(cmd.Parameters["registrado"].Value);
+                    mensaje = cmd.Parameters["mensaje"].Value.ToString();
+                }
+                catch(Exception ex)
+                {
+                    if (ex is SqlException)
+                    {
+                        return Error();
+                    }
+                }
+                
+            }
+
+            return Ok();
+        }
 
         [HttpPost]
 		public IActionResult Login(Usuario oUsuario)
@@ -136,7 +178,7 @@ namespace proyectoWeb_GYM.Controllers
 
             if(oUsuario.id_usuario != 0)
             {
-				HttpContext.Session.SetString("Usuario", oUsuario.nombre);
+				HttpContext.Session.SetString("Usuario", oUsuario.correo);
 
                 return RedirectToAction("Dashboard", "Home");
             }

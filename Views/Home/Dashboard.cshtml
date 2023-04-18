@@ -2,8 +2,20 @@
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    
 }
+
+<head>
+    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta1/css/bootstrap.min.css">
+
+<!-- Bootstrap JavaScri    pt     -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
+
+
+</head>
+
 
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -11,11 +23,67 @@
             <h1 class="fw-light">Bienvenido @ViewBag.nombre</h1>
             <p class="lead text-body-secondary">En esta página podras visualizar tú perfil entre otras cosas más.</p>
             <p>
-                <a href="#" class="btn btn-primary my-2">Completa tú perfil</a>
+               
+                <button id="myButton" class="btn btn-primary">Completa tu perfil</button>
+
+
+
                 <a href="@Url.Action("Logout", "Home")" class="btn btn-danger my-2">Cerrar sesión</a>
             </p>
         </div>
     </div>
 </section>
+
+
+<div class="modal" id="myModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Completa tu perfil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+       <form action="@Url.Action("GuardarDatos", "Home")" method="post">
+        
+          <div class="mb-3">
+            <label for="edad" class="form-label">Edad</label>
+            <input type="number" class="form-control" id="edad" name="edad" placeholder="Ingrese su edad" min="18">
+
+          </div>
+          <div class="mb-3">
+            <label for="peso" class="form-label">Peso</label>
+            <input type="number" class="form-control" id="peso" name="peso" placeholder="Ingrese su peso en libras." min="0">
+          </div>
+
+          <div class="mb-3">
+            <label for="estatura" class="form-label">Estatura</label>
+            <input type="number" class="form-control" id="estatura" name="estatura" placeholder="Ingrese su estatura en cm." min="0">
+          </div>
+
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo electronico</label>
+            <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese su correo">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  document.getElementById('myButton').addEventListener('click', function () {
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    myModal.show();
+  });
+</script>
 
 
