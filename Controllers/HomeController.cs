@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.SqlServer.Server;
+using Newtonsoft.Json;
 using proyectoWeb_GYM.Models;
 using proyectoWeb_GYM.Utilities;
 using System.Data;
@@ -70,7 +72,7 @@ namespace proyectoWeb_GYM.Controllers
 
 
         [HttpPost]
-        public IActionResult SignUp(Usuario oUsuario)
+        public IActionResult SignUp(Usuario usuario)
         {
             bool registrado;
             string mensaje;
@@ -78,18 +80,18 @@ namespace proyectoWeb_GYM.Controllers
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
                 SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", oConexion);
-                cmd.Parameters.AddWithValue("nombre", oUsuario.nombre);
-                cmd.Parameters.AddWithValue("apellido", oUsuario.apellido);
-                cmd.Parameters.AddWithValue("direccion", oUsuario.direccion);
-                cmd.Parameters.AddWithValue("telefono", oUsuario.telefono);
-                cmd.Parameters.AddWithValue("correo", oUsuario.correo);
-                cmd.Parameters.AddWithValue("clave", oUsuario.clave);
-                cmd.Parameters.AddWithValue("num_cuenta", oUsuario.num_cuenta);
-                cmd.Parameters.AddWithValue("nombre_titular", oUsuario.nombre_titular);
-                cmd.Parameters.AddWithValue("cvv", oUsuario.cvv);
-                cmd.Parameters.AddWithValue("mes", oUsuario.mes);
-                cmd.Parameters.AddWithValue("anio", oUsuario.anio);
-                cmd.Parameters.AddWithValue("id_membresia", oUsuario.oMembresia.id_membresia);
+                cmd.Parameters.AddWithValue("nombre", usuario.nombre);
+                cmd.Parameters.AddWithValue("apellido", usuario.apellido);
+                cmd.Parameters.AddWithValue("direccion", usuario.direccion);
+                cmd.Parameters.AddWithValue("telefono", usuario.telefono);
+                cmd.Parameters.AddWithValue("correo", usuario.correo);
+                cmd.Parameters.AddWithValue("clave", usuario.clave);
+                cmd.Parameters.AddWithValue("num_cuenta", usuario.num_cuenta);
+                cmd.Parameters.AddWithValue("nombre_titular", usuario.nombre_titular);
+                cmd.Parameters.AddWithValue("cvv", usuario.cvv);
+                cmd.Parameters.AddWithValue("mes", usuario.mes);
+                cmd.Parameters.AddWithValue("anio", usuario.anio);
+                cmd.Parameters.AddWithValue("id_membresia", usuario.id_membresia);
 
                 cmd.Parameters.Add("registrado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
@@ -108,7 +110,7 @@ namespace proyectoWeb_GYM.Controllers
 
             if (registrado)
             {
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login");
             }
             else
             {

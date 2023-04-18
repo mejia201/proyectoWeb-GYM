@@ -19,7 +19,7 @@ namespace proyectoWeb_GYM.Models
 
 		public int mes { get; set; }
 		public int anio { get; set; }
-        public Membresia oMembresia { get; set; }
+        public int id_membresia { get; set; }
         public bool estado { get; set; }
 
     }
