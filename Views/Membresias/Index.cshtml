@@ -1,0 +1,47 @@
+﻿@model IEnumerable<proyectoWeb_GYM.Models.Membresia>
+
+@{
+    ViewData["Title"] = "Membresias";
+}
+
+<h1 class="text-center">Membresias</h1>
+
+<p>
+    <a class="btn btn-primary mt-2" asp-action="Create">Crear una nueva</a>
+</p>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="table-light text-center">
+            <th>
+                @Html.DisplayNameFor(model => model.nombre_membresia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vendidas)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr class="table-info text-center">
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_membresia)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.precio, "{0:C}")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vendidas)
+            </td>
+            <td>
+                    <a class="btn btn-success text-center" asp-action="Edit" asp-route-id="@item.id_membresia">Editar</a> |
+                    <a class="btn btn-warning text-center" asp-action="Details" asp-route-id="@item.id_membresia">Detalle</a> |
+                    <a class="btn btn-danger text-center" asp-action="Delete" asp-route-id="@item.id_membresia">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

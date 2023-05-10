@@ -1,11 +1,16 @@
 ﻿using System.Data.SqlClient;
 using System.Security.Principal;
+using MessagePack;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace proyectoWeb_GYM.Models
 {
 	public class Usuario
 	{
+
+		[System.ComponentModel.DataAnnotations.Key]
 		public int id_usuario { get; set; }
         public string correo { get; set; }
         public string clave { get; set; }
@@ -19,7 +24,8 @@ namespace proyectoWeb_GYM.Models
 
 		public int mes { get; set; }
 		public int anio { get; set; }
-        public Membresia oMembresia { get; set; }
+
+        public int id_membresia { get; set; }
         public bool estado { get; set; }
 
     }

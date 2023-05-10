@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using proyectoWeb_GYM.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddDbContext<gymDbContext>(opt =>
+        opt.UseSqlServer(
+            builder.Configuration.GetConnectionString("gymDbConnection"))
+        );
 
 
 var app = builder.Build();
