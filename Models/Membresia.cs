@@ -1,12 +1,29 @@
-﻿using System.Security.Principal;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
 
 namespace proyectoWeb_GYM.Models
 {
     public class Membresia
     {
-    public int id_membresia { get; set; }
-	public string nombre_membresia { get; set; }
-    public float precio { get; set; }
-	public int vendidas { get; set; }
+
+    [Key]
+        [Display(Name = "ID Membresia")]
+        public int id_membresia { get; set; }
+
+        [Display(Name = "Nombre")]
+        public string? nombre_membresia { get; set; }
+        [Display(Name = "Precio")]
+        public double precio { get; set; }
+
+        [Display(Name = "Vendidas")]
+        public int vendidas { get; set; }
+
     }
+
+    
+
+
+
+
 }

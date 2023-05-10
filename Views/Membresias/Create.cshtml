@@ -1,0 +1,38 @@
+﻿@model proyectoWeb_GYM.Models.Membresia
+
+@{
+    ViewData["Title"] = "Crear Membresia";
+}
+
+<h1 class="text-center">Crear Membresia</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" >
+                <label asp-for="nombre_membresia" class="control-label"></label>
+                <input asp-for="nombre_membresia" class="form-control" />
+                <span asp-validation-for="nombre_membresia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="precio" class="control-label"></label>
+                <input asp-for="precio" class="form-control" />
+                <span asp-validation-for="precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="vendidas" class="control-label"></label>
+                <input asp-for="vendidas" class="form-control" />
+                <span asp-validation-for="vendidas" class="text-danger"></span>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Crear" class="btn btn-primary mt-2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary mt-1" asp-action="Index">Regresar a la lista</a>
+</div>
+

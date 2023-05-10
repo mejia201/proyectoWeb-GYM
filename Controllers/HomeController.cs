@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Server;
@@ -8,7 +9,10 @@ using proyectoWeb_GYM.Utilities;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
 using System.Web;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
 namespace proyectoWeb_GYM.Controllers
@@ -19,9 +23,11 @@ namespace proyectoWeb_GYM.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor context;
+        private readonly gymDbContext _gymContext;
 
-		
-		public HomeController(ILogger<HomeController> logger)
+
+
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
@@ -46,10 +52,28 @@ namespace proyectoWeb_GYM.Controllers
             return View();
         }
 
+        public IActionResult Consejos()
+        {
+            return View();
+        }
+
+        public IActionResult Administracion()
+        {
+            return View();
+        }
+
         [Authentication]
         public IActionResult Dashboard()
         {
-			ViewBag.nombre = HttpContext.Session.GetString("Usuario");
+            
+
+            ViewBag.nombre = HttpContext.Session.GetString("Usuario");
+
+
+            Usuario oUsuario = new Usuario();
+
+            oUsuario.correo = (string)TempData["correoUsuario"];
+
             return View();
         }
 
@@ -119,48 +143,40 @@ namespace proyectoWeb_GYM.Controllers
         }
 
         [HttpPost]
-        public IActionResult GuardarDatos(Info_usuario oUsuario)
+        public IActionResult Dashboard(Info_usuario oUsuario)
         {
-            bool registrado;
-            string mensaje;
-
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
+                SqlCommand cmd = new SqlCommand("sp_AgregarInformacionPersonal", oConexion);
+                cmd.Parameters.AddWithValue("edad", oUsuario.edad);
+                cmd.Parameters.AddWithValue("peso", oUsuario.peso);
+                cmd.Parameters.AddWithValue("estatura", oUsuario.estatura);
+                cmd.Parameters.AddWithValue("correo", oUsuario.correo);
 
-                try
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                oConexion.Open();
+
+                oUsuario.id_usuario = Convert.ToInt32(cmd.ExecuteScalar());
+
+                if (oUsuario.id_usuario != 0)
                 {
-                    SqlCommand cmd = new SqlCommand("sp_AgregarInformacionPersonal", oConexion);
-                    cmd.Parameters.AddWithValue("edad", oUsuario.edad);
-                    cmd.Parameters.AddWithValue("peso", oUsuario.peso);
-                    cmd.Parameters.AddWithValue("estatura", oUsuario.estatura);
-                   
 
-
-                    cmd.Parameters.Add("registrado", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    oConexion.Open();
-
-                    cmd.ExecuteNonQuery();
-
-                    registrado = Convert.ToBoolean(cmd.Parameters["registrado"].Value);
-                    mensaje = cmd.Parameters["mensaje"].Value.ToString();
+                    TempData["mensaje"] = "Se ha insertado correctamente en la base de datos tus datos.";
+                    return RedirectToAction("Dashboard", "Home");
                 }
-                catch(Exception ex)
+                else
                 {
-                    if (ex is SqlException)
-                    {
-                        return Error();
-                    }
+
+                    TempData["mensaje"] = "Ocurrió un error al insertar en la base de datos, este usuario ya completó su perfil.";
+
+                    return RedirectToAction("Dashboard", "Home");
                 }
-                
+
             }
 
-            return Ok();
         }
-
+            
         [HttpPost]
 		public IActionResult Login(Usuario oUsuario)
 		{   
@@ -174,13 +190,56 @@ namespace proyectoWeb_GYM.Controllers
 
 				oConexion.Open();
 
-				oUsuario.id_usuario = Convert.ToInt32(cmd.ExecuteScalar());
+                oUsuario.id_usuario  = Convert.ToInt32(cmd.ExecuteScalar());
 
-			}
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    if (oUsuario.id_usuario != 0)
+                    { 
+
+                    int id = (int)reader["id_usuario"];
+                    string nombre = (string)reader["nombre"];
+                    string apellido = (string)reader["apellido"];
+                    string correo = (string)reader["correo"];
+
+                    oUsuario.id_usuario = id;
+                    oUsuario.nombre = nombre;
+                    oUsuario.apellido = apellido;
+                    oUsuario.correo = correo;
+
+
+                    }
+                    else
+                    {
+                        ViewData["Mensaje"] = "Usuario no encontrado!";
+                        return View();
+                    }
+
+                   
+                }
+
+                reader.Close();
+                oConexion.Close();
+
+
+            }
 
             if(oUsuario.id_usuario != 0)
             {
-				HttpContext.Session.SetString("Usuario", oUsuario.correo);
+
+
+               if(oUsuario.correo == "admin@gmail.com")
+                {
+                    return RedirectToAction("Administracion", "Home");
+                }
+
+                HttpContext.Session.SetString("Usuario", oUsuario.nombre + " " + oUsuario.apellido);
+                
+
+                TempData["correoUsuario"] = oUsuario.correo;
 
                 return RedirectToAction("Dashboard", "Home");
             }
@@ -193,7 +252,6 @@ namespace proyectoWeb_GYM.Controllers
 
 
 		}
-
 
 
 		[HttpPost]
