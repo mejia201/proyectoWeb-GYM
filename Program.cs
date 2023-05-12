@@ -10,15 +10,21 @@ builder.Services.AddSession();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddResponseCaching();
+
+
 builder.Services.AddDbContext<gymDbContext>(opt =>
         opt.UseSqlServer(
             builder.Configuration.GetConnectionString("gymDbConnection"))
         );
 
 
+
+
 var app = builder.Build();
 
 app.UseSession();
+app.UseResponseCaching();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

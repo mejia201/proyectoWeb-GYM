@@ -32,10 +32,14 @@ namespace proyectoWeb_GYM.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
+		public IActionResult Index()
         {
-            return View();
+			return View();
         }
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
 		public IActionResult Login()
         {
@@ -85,9 +89,12 @@ namespace proyectoWeb_GYM.Controllers
 
 		public IActionResult Logout()
 		{
-           HttpContext.Session.Remove("Usuario");
-            return RedirectToAction("Login");
+
+            HttpContext.Session.Remove("Usuario");
+           return RedirectToAction("Index");
         }
+
+    
 
         public IActionResult RecuperarContraseña()
         {

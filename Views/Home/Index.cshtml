@@ -45,7 +45,7 @@
 					<a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item"><a class="nav-link" asp-action="Pricing">Membresía</a></li>
-				<li class="nav-item"><a class="nav-link" asp-action="Index">Consejos Fit</a></li>
+				<li class="nav-item"><a class="nav-link" asp-action="Consejos">Consejos Fit</a></li>
 				<li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">Iniciar sesión</a></li>
 
 			</ul>
@@ -335,5 +335,14 @@
 		</div>
 	</div>
 </footer>
+
+
+<script>
+	history.pushState(null, null, document.URL);
+	window.addEventListener('popstate', function () {
+		history.pushState(null, null, document.URL);
+	});
+</script>
+
 
 
