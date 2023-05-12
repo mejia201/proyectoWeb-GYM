@@ -13,5 +13,7 @@ namespace proyectoWeb_GYM.Models
 
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Membresia> Membresia { get; set; }
+
+        public DbSet<Info_usuario> Info_usuario { get; set; }
     }
 }

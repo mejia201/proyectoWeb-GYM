@@ -1,0 +1,63 @@
+﻿@using proyectoWeb_GYM.Controllers;
+@using proyectoWeb_GYM.Models;
+
+
+@{
+    ViewData["Title"] = "Reportes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+	var membresia = ViewData["listaMembresia"];
+	var usuarios = ViewData["listadoUsuarios"];
+}
+
+<div style="border-radius:5px">
+    <div class="text-center">
+        <h5 class="display-4">Usuarios</h5>
+        <p class="mb-4">
+            La siguiente tabla es para llevar el registro de usuarios para uso de el administrador.
+        </p>
+    </div>
+
+    <div class="container row p-3 mt-5">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped table-hover text-center">
+                <thead class="table-success">
+                    <tr>
+                        <th>ID Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Membresia</th>
+                        <th>Correo</th>
+                        <th>Edad</th>
+                        <th>Fecha de Creacion</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (UsuariosReportados usuario in (IEnumerable<UsuariosReportados>)usuarios)
+                    {
+                        <tr>
+                            <td>@usuario.id</td>
+                            <td>@usuario.nombre</td>
+                            <td>@usuario.apellido</td>
+                            <td>@usuario.nombre_mem</td>
+                            <td>@usuario.correo</td>
+                            <td>@usuario.edad</td>
+                            <td>@usuario.fecha</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center">
+
+        <a class="btn btn-primary" href="@Url.Action("GenerarPDF", "Usuario")" target="_blank">Descargar PDF</a>
+
+
+    </div>
+
+</div>
+
+
