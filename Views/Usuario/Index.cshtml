@@ -8,17 +8,18 @@
 
 	var membresia = ViewData["listaMembresia"];
 	var usuarios = ViewData["listadoUsuarios"];
+    var pagos = ViewData["listadoPagos"];
 }
 
-<div style="border-radius:5px">
+<div class="mt-2" style="border-radius:5px">
     <div class="text-center">
         <h5 class="display-4">Usuarios</h5>
         <p class="mb-4">
-            La siguiente tabla es para llevar el registro de usuarios para uso de el administrador.
+            La siguiente tabla es para llevar el registro de usuarios, con su perfil completo para uso de el administrador.
         </p>
     </div>
 
-    <div class="container row p-3 mt-5">
+    <div class="container row p-3 mt-5 table-responsive">
         <div class="col-md-12">
             <table class="table table-bordered table-striped table-hover text-center">
                 <thead class="table-success">
@@ -53,11 +54,64 @@
 
     <div class="text-center">
 
-        <a class="btn btn-primary" href="@Url.Action("GenerarPDF", "Usuario")" target="_blank">Descargar PDF</a>
+        <a class="btn btn-primary mt-3 mb-3" href="@Url.Action("GenerarPDF", "Usuario")" target="_blank">Descargar PDF</a>
 
 
     </div>
 
 </div>
+
+
+
+<div class="mt-5" style="border-radius:5px">
+    <div class="text-center">
+        <h5 class="display-4">Pagos</h5>
+        <p class="mb-4">
+            La siguiente tabla es para llevar el registro de pagos para uso de el administrador.
+        </p>
+    </div>
+
+    <div class="container row p-3 mt-5 table-responsive">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped table-hover text-center">
+                <thead class="table-warning">
+                    <tr>
+                        <th>ID Pago</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Membresia</th>
+                        <th>Fecha del Pago</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (PagosReportados pago in (IEnumerable<PagosReportados>)pagos)
+                    {
+                        <tr>
+                            <td>@pago.id_pago</td>
+                            <td>@pago.nombre</td>
+                            <td>@pago.apellido</td>
+                            <td>@pago.correo</td>
+                            <td>@pago.telefono</td>
+                            <td>@pago.nombre_mem</td>
+                            <td>@pago.fecha</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center">
+
+        <a class="btn btn-primary mt-3 mb-3" href="@Url.Action("GenerarPDF2", "Usuario")" target="_blank">Descargar PDF</a>
+
+
+    </div>
+
+</div>
+
 
 

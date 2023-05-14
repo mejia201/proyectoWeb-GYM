@@ -15,5 +15,7 @@ namespace proyectoWeb_GYM.Models
         public DbSet<Membresia> Membresia { get; set; }
 
         public DbSet<Info_usuario> Info_usuario { get; set; }
-    }
+
+		public DbSet<Registro_pago> Registro_pago { get; set; }
+	}
 }
