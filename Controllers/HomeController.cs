@@ -170,12 +170,17 @@ namespace proyectoWeb_GYM.Controllers
                 {
 
                     TempData["mensaje"] = "Se ha insertado correctamente en la base de datos tus datos.";
+
+                    TempData["edadUsuario"] = oUsuario.edad;
+                    TempData["pesoUsuario"] = oUsuario.peso;
+                    TempData["estaturaUsuario"] = oUsuario.estatura;
+
                     return RedirectToAction("Dashboard", "Home");
                 }
                 else
                 {
 
-                    TempData["mensaje"] = "Ocurrió un error al insertar en la base de datos, este usuario ya completó su perfil.";
+                    TempData["mensaje"] = "Ocurrió un error al insertar en la base de datos, este usuario ya completó su perfil, comuníquese con el administrador para poder editarlo";
 
                     return RedirectToAction("Dashboard", "Home");
                 }
