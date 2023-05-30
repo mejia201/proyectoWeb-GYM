@@ -7,6 +7,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using Microsoft.CodeAnalysis;
 using System.Xml.Linq;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace proyectoWeb_GYM.Controllers
 {
@@ -79,9 +80,9 @@ namespace proyectoWeb_GYM.Controllers
             PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(rutaArchivo, FileMode.Create));
             doc.Open();
 
-			string Foto = Url.Content("C:\\SCRUM\\proyectoWeb-GYM\\wwwroot\\icon-gymbro.png");
 
-			string rutaFoto = Path.Combine(_hostEnvironment.ContentRootPath, Foto);
+            string virtualPath ="wwwroot/images/icon-gymbro.png";           
+            string rutaFoto = Path.Combine(_hostEnvironment.ContentRootPath, virtualPath);
             Image foto = Image.GetInstance(rutaFoto);
             foto.ScaleToFit(200f, 200f); 
             foto.Alignment = Element.ALIGN_CENTER;
