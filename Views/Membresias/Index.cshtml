@@ -9,9 +9,10 @@
 <p>
     <a class="btn btn-primary mt-2" asp-action="Create">Crear una nueva</a>
 </p>
-<table class="table table-bordered table-striped table-hover">
-    <thead>
-        <tr class="table-light text-center">
+<table class="table table-hover table-bordered table-light" style="box-shadow:  20px 20px 60px #858080,
+             -20px -20px 60px #b3adad;">
+    <thead class="thead-dark">
+        <tr class="text-center">
             <th>
                 @Html.DisplayNameFor(model => model.nombre_membresia)
             </th>
@@ -26,7 +27,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-            <tr class="table-info text-center">
+            <tr class="text-center">
             <td>
                 @Html.DisplayFor(modelItem => item.nombre_membresia)
             </td>
